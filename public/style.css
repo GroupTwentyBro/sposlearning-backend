@@ -226,8 +226,8 @@ icon {
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
-    width: 150px;
-    max-width: 30vw;
+    width: max-content;
+    max-width: 70vw;
     background-color: #333333EE;
     color: white;
     padding: 4px 8px;
