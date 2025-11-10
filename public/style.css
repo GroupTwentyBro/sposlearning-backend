@@ -257,3 +257,63 @@ textarea {
     tab-size: 4;
     -moz-tab-size: 4; /* Fix for older Firefox versions */
 }
+
+#login-form input {
+    background-color: hsl(198, 31%, 12%);
+    border: 1px solid hsl(198, 31%, 18%);
+    color: white;
+}
+
+#login-form select {
+    background-color: hsl(198, 31%, 12%);
+    border: 1px solid hsl(198, 31%, 18%);
+    color: white;
+}
+
+#login-form textarea {
+    background-color: hsl(198, 31%, 12%);
+    border: 1px solid hsl(198, 31%, 18%);
+    color: white;
+}
+
+#login-form #editor-files input {
+    background-color: #0b1215;
+    border: none;
+    color: white;
+}
+
+#login-form #editor-files input button {
+    background-color: hsl(198, 31%, 18%);
+    border: 1px solid hsl(198, 31%, 12%);
+    color: white;
+}
+
+#search-results a {
+    background-color: hsl(198, 31%, 12%);
+    border: 1px solid hsl(198, 31%, 18%);
+    color: white;
+}
+
+#search-results select {
+    background-color: hsl(198, 31%, 12%);
+    border: 1px solid hsl(198, 31%, 18%);
+    color: white;
+}
+
+#search-results textarea {
+    background-color: hsl(198, 31%, 12%);
+    border: 1px solid hsl(198, 31%, 18%);
+    color: white;
+}
+
+#search-results #editor-files input {
+    background-color: #0b1215;
+    border: none;
+    color: white;
+}
+
+#search-results #editor-files input button {
+    background-color: hsl(198, 31%, 18%);
+    border: 1px solid hsl(198, 31%, 12%);
+    color: white;
+}
