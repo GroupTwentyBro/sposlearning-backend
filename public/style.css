@@ -360,5 +360,5 @@ textarea {
 }
 
 .info-message a {
-    color: #ff006e;
+    color: hsla(180, 180%, 50%, 1);
 }
