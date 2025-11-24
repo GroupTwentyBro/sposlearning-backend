@@ -132,32 +132,54 @@ function renderError(slug) {
  * Adds Edit/Delete buttons if the user is logged in
  */
 function setupAdminTools() {
+    const adminBar = document.getElementById('admin-bar');
+
+    // 1. Render the "Always Visible" part (The Home Button)
+    // We use a container 'admin-controls' to keep styling consistent
+    adminBar.innerHTML = `
+        <div class="admin-controls">
+            <a href="/" class="btn btn-sm btn-primary">Domů</a>
+            
+            <div id="logged-in-buttons" style="display: flex; gap: 10px; align-items: center;"></div>
+        </div>
+    `;
+
+    // 2. Check Auth state to add the rest
     const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
-        const adminBar = document.getElementById('admin-bar');
-        if (user && currentPage) {
-            // User is logged in AND we are on a valid page
+        const loggedInContainer = document.getElementById('logged-in-buttons');
 
+        if (user) {
+            // User is logged in -> Add the extra buttons
             let editButton = '';
-            // Only show "Edit" for text pages
-            if (currentPage.data.type === 'markdown' || currentPage.data.type === 'html') {
-                editButton = `<a href="/admin/edit.html?path=${currentPage.data.fullPath}" class="btn btn-sm btn-primary" id="edit-button">Edit Page</a>`;
+            let deleteButton = '';
+
+            // Only show Edit/Delete if we are on a valid page (currentPage exists)
+            if (currentPage) {
+                // Edit Button logic
+                if (currentPage.data.type === 'markdown' || currentPage.data.type === 'html') {
+                    editButton = `<a href="/admin/edit.html?path=${currentPage.data.fullPath}" class="btn btn-sm btn-primary" id="edit-button">Upravit</a>`;
+                }
+                // Delete Button logic
+                deleteButton = `<button id="delete-button" class="btn btn-sm btn-danger">Smazat</button>`;
             }
 
-            adminBar.innerHTML = `
-                <div class="admin-controls">
-                    <span>Vítej, admine!</span>
-                    ${editButton}
-                    <button id="delete-button" class="btn btn-sm btn-danger">Delete Page</button>
-                    <a href="/admin/dashboard" class="btn btn-sm btn-dark btn-admin">Admin Panel</a>
-                </div>
+            // Inject buttons
+            loggedInContainer.innerHTML = `
+                <span class="text-light d-none d-sm-inline">Vítej, admine!</span>
+                ${editButton}
+                ${deleteButton}
+                <a href="/admin/dashboard" class="btn btn-sm btn-dark btn-admin">Admin Panel</a>
             `;
 
-            // Add click listener for the new delete button
-            document.getElementById('delete-button').addEventListener('click', handleDeletePage);
-
+            // Add event listener for delete (if it exists)
+            const delBtn = document.getElementById('delete-button');
+            if (delBtn) {
+                delBtn.addEventListener('click', handleDeletePage);
+            }
         } else {
-            adminBar.innerHTML = '';
+            // User is not logged in -> Clear the container just in case
+            loggedInContainer.innerHTML = '';
         }
     });
 }
